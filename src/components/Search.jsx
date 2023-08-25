@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 
 export const Search = (props) => {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const [type, setType] = useState("all");
-
-  const handleKey = (e) => {
-    if (e.key === "Enter") {
+  const handleKey = (event) => {
+    if (event.key === "Enter") {
       props.searchMovies(search);
     }
   };
 
-  const handelerButton = (movie) => {
-    setSearch(movie);
-    props.searchMovies(search);
-  };
-
   const handleFilter = (event) => {
-    setType(event.currentTarget.dataset.type);
-    props.searchMovies(search);
+    setType(event.target.dataset.type);
+    props.searchMovies(search, event.target.dataset.type);
   };
 
   return (
@@ -26,41 +20,43 @@ export const Search = (props) => {
         <div className="col s12"></div>
         <div className="inpit-field inline">
           <input
-            placeholder="search"
+            id="email_inline"
             type="search"
+            placeholder="search"
             className="validate"
-            onChange={(e) => setSearch(e.currentTarget.value)}
-            onKeyDown={handleKey}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => handleKey(e)}
           />
-          <button onClick={(e) => handelerButton(e.currentTarget.value)}>
+          <button onClick={(e) => props.searchMovies(search, type)}>
             Search movie
           </button>
         </div>
         <div>
           <input
-            name="all"
+            className="with-gap"
+            name="group3"
             type="radio"
-            value={type}
             data-type="all"
-            onChange={handleFilter}
+            onChange={(e) => handleFilter(e)}
             checked={type === "all"}
           />
           <span>All</span>
           <input
-            name="movies"
+            className="with-gap"
+            name="group3"
             type="radio"
-            value={type}
             data-type="movie"
-            onChange={handleFilter}
+            onChange={(e) => handleFilter(e)}
             checked={type === "movie"}
           />
           <span>Movies</span>
           <input
-            name="series"
+            className="with-gap"
+            name="group3"
             type="radio"
-            value={type}
             data-type="series"
-            onChange={handleFilter}
+            onChange={(e) => handleFilter(e)}
             checked={type === "series"}
           />
           <span>Series</span>

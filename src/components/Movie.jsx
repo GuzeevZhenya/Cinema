@@ -7,7 +7,7 @@ import { CardActionArea } from "@mui/material";
 
 export const Movie = (props) => {
   const { Title, Year, imdbID, Type, Poster } = props;
-  console.log(props);
+
   return (
     <div className="movie-container">
       <Card sx={{ maxWidth: 345 }}>
@@ -17,7 +17,7 @@ export const Movie = (props) => {
             height="140"
             image={
               Poster === "N/A"
-                ?"https://via.placeholder.com/300x400?text=$`{Title}`"  
+                ? "https://via.placeholder.com/300x400?text=$`{Title}`"
                 : Poster
             }
             alt="green iguana"
